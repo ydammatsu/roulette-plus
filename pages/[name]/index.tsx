@@ -128,7 +128,7 @@ const RoulettePage: NextPage = () => {
         handleClose={() => setModalOpen(false)}
       />
       <HeaderWrapper>
-        <h1>Roulette</h1>
+        <h1>{rouletteName}</h1>
       </HeaderWrapper>
       <RouletteWrapper>
         {initial ? (
