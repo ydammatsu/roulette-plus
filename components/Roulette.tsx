@@ -21,7 +21,7 @@ const calcDashWidth = (radius: number, numSlots: number) => {
 const Roulette = (props: Props) => {
   const targets = props.candidates.filter((c) => !c.hide);
   const numSlots = targets.length;
-  const [styles, api] = useSpring(() => ({
+  const [styles, _] = useSpring(() => ({
     from: { y: 0 },
     config: {
       easing: easePolyOut,
