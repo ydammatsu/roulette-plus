@@ -23,7 +23,6 @@ function Roulette(props: Props) {
   const numSlots = targets.length;
   const [styles, api] = useSpring(() => ({
     from: { y: 0 },
-    delay: 2000,
     config: {
       easing: easePolyOut,
       duration: 10000
