@@ -8,17 +8,17 @@ import {
   ReactNode,
   useEffect
 } from "react";
-import { useSpring, animated } from "react-spring";
-import { MemoRoulette } from "../components/Roulette";
-import { CandidateHeader, CandidateRow } from "../components/Candidate";
-import styled from "styled-components";
-import { reducerWithMiddleware } from "../stateManagement/reducer";
-import { initialState } from "../stateManagement/states";
-import MyModal from "../components/MyModal";
-import { Candidate } from "../stateManagement/states";
-import { JPInput } from "../components/JPInput";
-import { getAppStateFromLS } from "../lib/localStorage";
 import { NextPage } from "next";
+import { useSpring, animated } from "react-spring";
+import { MemoRoulette } from "components/Roulette";
+import { JPInput } from "components/JPInput";
+import { CandidateHeader, CandidateRow } from "components/Candidate";
+import MyModal from "components/MyModal";
+import styled from "styled-components";
+import { initialState } from "stateManagement/states";
+import { Candidate } from "stateManagement/states";
+import { reducerWithMiddleware } from "stateManagement/reducer";
+import { getAppStateFromLS } from "lib/localStorage";
 
 const AppWrapper = styled.div`
   font-family: sans-serif;

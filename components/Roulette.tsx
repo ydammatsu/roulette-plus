@@ -1,8 +1,8 @@
 import { animated, useSpring } from "react-spring";
 import { easePolyOut } from "d3-ease";
 import { useEffect, memo, useRef } from "react";
-import { calcWinner } from "../lib/calc";
-import { Candidate } from "../stateManagement/states";
+import { calcWinner } from "lib/calc";
+import { Candidate } from "stateManagement/states";
 
 type Props = {
   radius: number;
@@ -18,7 +18,7 @@ const calcDashWidth = (radius: number, numSlots: number) => {
   return (radius * PI * 2) / numSlots;
 };
 
-function Roulette(props: Props) {
+const Roulette = (props: Props) => {
   const targets = props.candidates.filter((c) => !c.hide);
   const numSlots = targets.length;
   const [styles, api] = useSpring(() => ({
@@ -74,7 +74,6 @@ function Roulette(props: Props) {
           const winnerIdx = calcWinner(y, numSlots);
           const winner = targets[winnerIdx];
           props.onRest();
-          //alert(`Winner is ${winner.idx}: ${winner.name}`);
         }
       });
     }
@@ -168,6 +167,7 @@ function Roulette(props: Props) {
 const candidatesEqual = (ca: Candidate, cb: Candidate) => {
   return ca.name === cb.name && ca.idx === cb.idx && ca.hide === cb.hide;
 };
+
 const areEqual = (prevProps: Props, nextProps: Props) => {
   const res =
     prevProps.radius === nextProps.radius &&
@@ -180,4 +180,5 @@ const areEqual = (prevProps: Props, nextProps: Props) => {
       .reduce((x, y) => x && y);
   return res;
 };
+
 export const MemoRoulette = memo(Roulette, areEqual);
