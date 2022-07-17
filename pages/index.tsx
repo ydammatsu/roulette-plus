@@ -103,7 +103,7 @@ const Home: NextPage = () => {
       candidates: initialState.candidates,
       currentWinner: initialState.currentWinner
     })
-  })
+  }, [])
 
   const [v, setV] = useState("");
   const initial = state.candidates.length < 2;
