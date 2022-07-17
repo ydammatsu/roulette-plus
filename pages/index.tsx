@@ -89,6 +89,11 @@ const getInitialState = () => {
 
 
 const Home: NextPage = () => {
+  const [isRendered, setIsRendered] = useState(false)
+  useEffect(() => {
+    setIsRendered(true);
+  }, []);
+
   const [spinIt, setSpinIt] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [state, dispatch] = useReducer(
@@ -107,7 +112,7 @@ const Home: NextPage = () => {
 
   const [v, setV] = useState("");
   const initial = state.candidates.length < 2;
-  return (
+  return isRendered ? (
     <Wrapper initial={initial}>
       <MyModal
         winner={state.currentWinner}
@@ -195,7 +200,7 @@ const Home: NextPage = () => {
         </CandidatesWrapper>
       </ControllerWrapper>
     </Wrapper>
-  );
+  ): (<></>);
 }
 
 export default Home
