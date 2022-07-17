@@ -12,7 +12,7 @@ type Props = {
   onRest: () => void;
 };
 
-const PI = 3.1415;
+const PI = 3.14159;
 
 const calcDashWidth = (radius: number, numSlots: number) => {
   return (radius * PI * 2) / numSlots;
@@ -65,20 +65,16 @@ const Roulette = (props: Props) => {
           const winnerIdx = calcWinner(y, numSlots);
           const winner = targets[winnerIdx];
           if (winner.idx !== currentWinner.idx) {
-            currentWinner = winner;
             props.onCurrentWinnerChange(winner);
           }
         },
         onRest: () => {
-          const y = styles.y.get();
-          const winnerIdx = calcWinner(y, numSlots);
-          const winner = targets[winnerIdx];
           props.onRest();
         }
       });
     }
     prevSpinIt.current = props.spinIt;
-  }, [props.spinIt, styles.y, numSlots, targets]);
+  }, [props.spinIt, styles.y, numSlots, targets, props, currentWinner.idx]);
 
   return (
     <svg width={svgConfig.width} height={svgConfig.height}>
