@@ -19,10 +19,6 @@ const calcDashWidth = (radius: number, numSlots: number) => {
 };
 
 function Roulette(props: Props) {
-  console.log(
-    "%cI'm rendering",
-    "color: red; font-size: 20px; background: white"
-  );
   const targets = props.candidates.filter((c) => !c.hide);
   const numSlots = targets.length;
   const [styles, api] = useSpring(() => ({
@@ -70,7 +66,6 @@ function Roulette(props: Props) {
           const winnerIdx = calcWinner(y, numSlots);
           const winner = targets[winnerIdx];
           if (winner.idx !== currentWinner.idx) {
-            console.log(winner);
             currentWinner = winner;
             props.onCurrentWinnerChange(winner);
           }
