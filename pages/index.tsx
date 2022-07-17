@@ -5,7 +5,8 @@ import {
   KeyboardEvent,
   FC,
   memo,
-  ReactNode
+  ReactNode,
+  useEffect
 } from "react";
 import { useSpring, animated } from "react-spring";
 import { MemoRoulette } from "../components/Roulette";
@@ -92,8 +93,18 @@ const Home: NextPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [state, dispatch] = useReducer(
     reducerWithMiddleware,
-    getInitialState()
+    initialState
   );
+
+  useEffect(() => {
+    const initialState = getInitialState()
+    dispatch({
+      type: "set_initial_state",
+      candidates: initialState.candidates,
+      currentWinner: initialState.currentWinner
+    })
+  })
+
   const [v, setV] = useState("");
   const initial = state.candidates.length < 2;
   return (

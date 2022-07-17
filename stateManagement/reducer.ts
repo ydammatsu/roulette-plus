@@ -3,6 +3,11 @@ import { State } from "./states";
 import { saveAppStateToLS } from "../lib/localStorage";
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case "set_initial_state":
+      return {
+        candidates: action.candidates,
+        currentWinner: action.currentWinner
+      };
     case "add_candidate":
       return {
         ...state,
