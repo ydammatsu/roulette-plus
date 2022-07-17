@@ -74,6 +74,6 @@ export const reducer = (state: State, action: Action): State => {
 export const reducerWithMiddleware: typeof reducer = (state, action) => {
   const s = reducer(state, action);
 
-  saveAppStateToLS(s);
+  saveAppStateToLS(action.name, s);
   return s;
 };

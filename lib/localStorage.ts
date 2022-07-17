@@ -1,12 +1,12 @@
 import { State } from "../stateManagement/states";
 
-const KEY = "AppState";
-export const saveAppStateToLS = (data: any) => {
-  window.localStorage.setItem(KEY, JSON.stringify(data));
+export const saveAppStateToLS = (name: string, data: any) => {
+  console.log(name)
+  window.localStorage.setItem(name, JSON.stringify(data));
 };
 
-export const getAppStateFromLS = () => {
-  const item = window.localStorage.getItem(KEY);
+export const getAppStateFromLS = (name: string) => {
+  const item = window.localStorage.getItem(name);
   if (item) {
     return JSON.parse(item) as State;
   } else {
