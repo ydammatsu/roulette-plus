@@ -20,6 +20,7 @@ import { Candidate } from "stateManagement/states";
 import { reducerWithMiddleware } from "stateManagement/reducer";
 import { getAppStateFromLS } from "lib/localStorage";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const AppWrapper = styled.div`
   font-family: sans-serif;
@@ -52,7 +53,15 @@ const Wrapper: FC<{ initial: boolean, children: ReactNode }> = ({ initial, child
   );
 };
 
-const HeaderWrapper = styled.div`
+const H1Wrapper = styled.h1`
+  z-index: 100;
+  padding: 3px;
+  margin: 3px;
+  grid-area: header;
+  text-align: left;
+`;
+
+const H2Wrapper = styled.h2`
   grid-area: header;
   text-align: center;
 `;
@@ -127,9 +136,8 @@ const RoulettePage: NextPage = () => {
         open={modalOpen}
         handleClose={() => setModalOpen(false)}
       />
-      <HeaderWrapper>
-        <h1>{rouletteName}</h1>
-      </HeaderWrapper>
+      <H1Wrapper><Link href={"/"}><a>Roulette</a></Link></H1Wrapper>
+      <H2Wrapper>{rouletteName}</H2Wrapper>
       <RouletteWrapper>
         {initial ? (
           <FM />
