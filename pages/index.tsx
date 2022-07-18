@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FC, useState } from "react";
 import { useGetAllRoulettes } from "hooks/useGetAllRoulettes";
 import styled from "styled-components";
+import { useWaitRender } from "hooks/useWaitRender";
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -57,12 +58,15 @@ const Roulettes: FC = () => {
 }
 
 const Home: NextPage = () => {
-  return(
+  // CSSが摘要されるのを待つ
+  const isRendered = useWaitRender()
+
+  return isRendered ? (
     <>
       <HeaderWrapper><h1>Roulette</h1></HeaderWrapper>
       <BodyWrapper><Roulettes/></BodyWrapper>
     </>
-  )
+  ): <></>
 }
 
 export default Home

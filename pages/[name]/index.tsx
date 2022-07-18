@@ -21,6 +21,7 @@ import { reducerWithMiddleware } from "stateManagement/reducer";
 import { getAppStateFromLS } from "lib/localStorage";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useWaitRender } from "hooks/useWaitRender";
 
 const AppWrapper = styled.div`
   font-family: sans-serif;
@@ -105,10 +106,8 @@ const RoulettePage: NextPage = () => {
     rouletteName = name;
   }
 
-  const [isRendered, setIsRendered] = useState(false)
-  useEffect(() => {
-    setIsRendered(true);
-  }, []);
+  // CSSが摘要されるのを待つ
+  const isRendered = useWaitRender()
 
   const [spinIt, setSpinIt] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
