@@ -1,8 +1,19 @@
 import { NextPage } from "next";
+import { useQuery } from 'urql';
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
+import { GetRouletteQuery } from "lib/gql";
 
 const Roulettes: FC = () => {
+  const [result, _] = useQuery({
+    query: GetRouletteQuery,
+    variables: {name: "Sample Roulette"}
+  });
+  const { data, fetching, error } = result;
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   const [names, setNames] = useState<string[]>([])
 
   useEffect(() => {
