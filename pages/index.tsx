@@ -1,40 +1,22 @@
 import { NextPage } from "next";
-import { useQuery } from 'urql';
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import { GetRouletteQuery } from "lib/gql";
+import { FC } from "react";
+import { useGetAllRoulettes } from "hooks/useGetAllRoulettes";
 
 const Roulettes: FC = () => {
-  const [result, _] = useQuery({
-    query: GetRouletteQuery,
-    variables: {name: "Sample Roulette"}
-  });
-  const { data, fetching, error } = result;
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+  const { roulettes, setRoulettes, fetching, error } = useGetAllRoulettes()
 
-  const [names, setNames] = useState<string[]>([])
-
-  useEffect(() => {
-    let rouletteNames: string[] = []
-    for (var i = 0, length = localStorage.length; i < length; ++i) {
-      const key = localStorage.key(i)
-      if (key !== null) {
-        rouletteNames.push(key)
-      }
-    }
-    setNames(rouletteNames)
-  }, [])
+  if (fetching) { return <p>loading...</p> }
+  if (error) { return <p>error</p> }
 
   return (
     <>
       {
-        names.map(
+        roulettes.map(
           (value, index) =>
             <div key={index}>
-              <Link href={`/${value}`}>
-                <a>{value}</a>
+              <Link href={`/${value.name}`}>
+                <a>{value.name}</a>
               </Link>
             </div>
         )

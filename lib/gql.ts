@@ -7,12 +7,14 @@ export const GqlClient = createClient({
 });
 
 export const GetAllRouletteQuery = `
-  listRoulettes {
-    items {
-      candidates
-      description
-      id
-      name
+  query {
+    listRoulettes {
+      items {
+        id
+        name
+        description
+        candidates
+      }
     }
   }
 `
