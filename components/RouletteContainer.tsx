@@ -90,12 +90,11 @@ type Props = {
 
 export const RouletteContainer = (props: Props) => {
   const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName);
-
   const [spinIt, setSpinIt] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-
   const [v, setV] = useState("");
   const initial = roulette.candidates.length < 2;
+
   return (
     <Wrapper initial={initial}>
       <MyModal
@@ -139,7 +138,7 @@ export const RouletteContainer = (props: Props) => {
           onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
             switch (e.key) {
               case "Enter": {
-                setRoulette({...roulette, candidates: [...roulette.candidates, { idx: 1, name: v, hide: false }]})
+                setRoulette({...roulette, candidates: [...roulette.candidates, { idx: roulette.candidates.length + 1, name: v, hide: false }]})
                 setV("");
               }
             }

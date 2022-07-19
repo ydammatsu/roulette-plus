@@ -14,9 +14,15 @@ export const useRoulette = (name: string) => {
   const { data, fetching, error } = result;
 
   useEffect(() => {
-    if (fetching!) {
-    // data.listRoulettes.items
-    // setRoulette(data.listRoulettes.items[0])
+    if (!fetching) {
+      const rouleteData = data?.listRoulettes?.items[0]
+      if (rouleteData) {
+        const id = rouleteData.id
+        const name = rouleteData.name
+        const candidates = rouleteData.candidates.map((value: string) => {return JSON.parse(value)})
+  
+        setRoulette({ id, name, candidates })
+      }
     }
   }, [data, fetching, result])
 
