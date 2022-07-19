@@ -1,7 +1,6 @@
 import { State } from "../stateManagement/states";
 
 export const saveAppStateToLS = (name: string, data: any) => {
-  console.log(name)
   window.localStorage.setItem(name, JSON.stringify(data));
 };
 

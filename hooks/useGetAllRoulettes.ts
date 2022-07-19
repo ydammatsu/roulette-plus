@@ -1,10 +1,10 @@
 import { GetAllRouletteQuery } from "lib/gql";
 import { useEffect, useState } from "react";
-import { Candidate } from "types/Roulette";
+import { Roulette } from "types/Roulette";
 import { useQuery } from "urql";
 
 export const useGetAllRoulettes = () => {
-  const [roulettes, setRoulettes] = useState<Candidate[]>([]);
+  const [roulettes, setRoulettes] = useState<Roulette[]>([]);
   const [result, _] = useQuery({
     query: GetAllRouletteQuery,
   });
