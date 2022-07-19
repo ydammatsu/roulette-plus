@@ -154,10 +154,53 @@ export const RouletteContainer = (props: Props) => {
                 idx={c.idx}
                 key={i}
                 highlight={c.idx === currentWinner.idx}
-                changeHandler={(s: string) => {}}
-                deleteHandler={() => {}}
-                hideHandler={() => {}}
-                showHandler={() => {}}
+                changeHandler={(s: string) => {
+                    const changeTarget = roulette.candidates[i];
+                    setRoulette({
+                        ...roulette,
+                        candidates: [
+                          ...roulette.candidates.slice(0, i),
+                          { ...changeTarget, name: s },
+                          ...roulette.candidates.slice(
+                            i + 1,
+                            roulette.candidates.length + 1
+                          )
+                        ]
+                      })
+                  }}
+                deleteHandler={() => {
+                  setRoulette({...roulette, candidates: roulette.candidates.filter((_, index) => index !== i)}) }
+                }
+                hideHandler={() => {
+                  const hideTarget = roulette.candidates[i];
+                  const newRoulette = {
+                    ...roulette,
+                    candidates: [
+                      ...roulette.candidates.slice(0, i),
+                      { ...hideTarget, hide: true },
+                      ...roulette.candidates.slice(
+                        i + 1,
+                        roulette.candidates.length + 1
+                      )
+                    ]
+                  };
+                  setRoulette(newRoulette)
+                }}
+                showHandler={() => {
+                  const showTarget = roulette.candidates[i];
+                  const newRoulette = {
+                    ...roulette,
+                    candidates: [
+                      ...roulette.candidates.slice(0, i),
+                      { ...showTarget, hide: false },
+                      ...roulette.candidates.slice(
+                        i + 1,
+                        roulette.candidates.length + 1
+                      )
+                    ]
+                  }
+                  setRoulette(newRoulette);
+                }}
               />
             );
           })}
