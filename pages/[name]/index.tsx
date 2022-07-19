@@ -55,6 +55,7 @@ const Wrapper: FC<{ initial: boolean, children: ReactNode }> = ({ initial, child
 };
 
 const H1Wrapper = styled.h1`
+  font-size: 30px;
   z-index: 100;
   padding: 3px;
   margin: 3px;
