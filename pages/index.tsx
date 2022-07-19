@@ -4,6 +4,8 @@ import { FC, useState } from "react";
 import { useGetAllRoulettes } from "hooks/useGetAllRoulettes";
 import styled from "styled-components";
 import { useWaitRender } from "hooks/useWaitRender";
+import { useMutation } from "urql";
+import { CreateRouletteMutation } from "lib/gql";
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -29,8 +31,17 @@ const FormWrapper = styled.div`
 const Roulettes: FC = () => {
   const { roulettes, setRoulettes, fetching, error } = useGetAllRoulettes()
   const [newRouletteName, setNewRouletteName] = useState("")
+  const [createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
+
   const handleSubmit = (): void => {
-    console.log(newRouletteName)
+    createRoulette({
+      createrouletteinput: {
+        id: Math.random().toString(32).substring(2),
+        name: newRouletteName,
+        description: "",
+        candidates: []
+      }
+    })
     setNewRouletteName("")
   }
 

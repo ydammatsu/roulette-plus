@@ -31,3 +31,14 @@ export const GetRouletteQuery = `
     }
   }
 `;
+
+export const CreateRouletteMutation = `
+  mutation ($createrouletteinput: CreateRouletteInput!) {
+    createRoulette(input: $createrouletteinput) {
+      id
+      name
+      description
+      candidates
+    }
+  }
+`

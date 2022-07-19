@@ -9,6 +9,7 @@ export const useGetAllRoulettes = () => {
     query: GetAllRouletteQuery,
   });
   const { data, fetching, error } = result;
+
   useEffect(() => {
     if (!fetching) {
       setRoulettes(data.listRoulettes.items)
