@@ -12,9 +12,9 @@ import { JPInput } from "components/JPInput";
 import { CandidateHeader, CandidateRow } from "components/Candidate";
 import MyModal from "components/MyModal";
 import styled from "styled-components";
-import { Candidate } from "stateManagement/states";
 import Link from "next/link";
 import { useRoulette } from "hooks/useRoulette";
+import { Candidate } from "types/Roulette";
 
 const AppWrapper = styled.div`
   font-family: sans-serif;

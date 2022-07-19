@@ -2,7 +2,7 @@ import { animated, useSpring } from "react-spring";
 import { easePolyOut } from "d3-ease";
 import { useEffect, memo, useRef } from "react";
 import { calcWinner } from "lib/calc";
-import { Candidate } from "stateManagement/states";
+import { Candidate } from "types/Roulette";
 
 type Props = {
   radius: number;

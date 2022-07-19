@@ -1,6 +1,6 @@
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import { styled, Box } from "@mui/system";
-import { Candidate } from "stateManagement/states";
+import { Candidate } from "types/Roulette";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
