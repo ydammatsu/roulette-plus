@@ -92,11 +92,13 @@ type Props = {
 };
 
 export const RouletteContainer = (props: Props) => {
-  const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName);
+  const [pauseQuery, setPouseQuery] = useState(false)
+  const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName, pauseQuery);
   const [updateRouletteResult, updateRoulette] = useMutation(UpdateRouletteMutation);
   const handleUpdateRoulette = (roulette: Roulette) => {
-    // なぜかupdateRouletteをすると再度queryが叩かれてしまう
-    // setRoulette(roulette)
+    // 再度 query が叩かれるのを防ぐため mutation を叩く前に pause を true にしておく
+    setPouseQuery(true)
+    setRoulette(roulette)
     updateRoulette({ updateRouletteinput: {
         ...roulette,
         candidates: roulette.candidates.map((candidate) => { return JSON.stringify(candidate) })
