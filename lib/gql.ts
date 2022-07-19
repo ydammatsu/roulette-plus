@@ -42,3 +42,14 @@ export const CreateRouletteMutation = `
     }
   }
 `
+
+export const UpdateRouletteMutation = `
+  mutation ($updateRouletteinput: UpdateRouletteInput!) {
+    updateRoulette(input: $updateRouletteinput) {
+      id
+      name
+      description
+      candidates
+    }  
+  }
+`

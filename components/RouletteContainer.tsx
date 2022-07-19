@@ -14,7 +14,10 @@ import MyModal from "components/MyModal";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRoulette } from "hooks/useRoulette";
-import { Candidate } from "types/Roulette";
+import { Candidate, Roulette } from "types/Roulette";
+import { useMutation } from "urql";
+import { UpdateRouletteMutation } from "lib/gql";
+import { json } from "stream/consumers";
 
 const AppWrapper = styled.div`
   font-family: sans-serif;
@@ -90,6 +93,16 @@ type Props = {
 
 export const RouletteContainer = (props: Props) => {
   const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName);
+  const [updateRouletteResult, updateRoulette] = useMutation(UpdateRouletteMutation);
+  const handleUpdateRoulette = (roulette: Roulette) => {
+    setRoulette(roulette)
+    updateRoulette({ updateRouletteinput: {
+        ...roulette,
+        candidates: roulette.candidates.map((candidate) => { return JSON.stringify(candidate) })
+      }
+    })
+  }
+
   const [spinIt, setSpinIt] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [v, setV] = useState("");
@@ -138,7 +151,8 @@ export const RouletteContainer = (props: Props) => {
           onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
             switch (e.key) {
               case "Enter": {
-                setRoulette({...roulette, candidates: [...roulette.candidates, { idx: roulette.candidates.length + 1, name: v, hide: false }]})
+                const newRoulette = {...roulette, candidates: [...roulette.candidates, { idx: roulette.candidates.length + 1, name: v, hide: false }]}
+                handleUpdateRoulette(newRoulette)
                 setV("");
               }
             }
@@ -156,21 +170,23 @@ export const RouletteContainer = (props: Props) => {
                 highlight={c.idx === currentWinner.idx}
                 changeHandler={(s: string) => {
                     const changeTarget = roulette.candidates[i];
-                    setRoulette({
-                        ...roulette,
-                        candidates: [
-                          ...roulette.candidates.slice(0, i),
-                          { ...changeTarget, name: s },
-                          ...roulette.candidates.slice(
-                            i + 1,
-                            roulette.candidates.length + 1
-                          )
-                        ]
-                      })
+                    const newRoulette = {
+                      ...roulette,
+                      candidates: [
+                        ...roulette.candidates.slice(0, i),
+                        { ...changeTarget, name: s },
+                        ...roulette.candidates.slice(
+                          i + 1,
+                          roulette.candidates.length + 1
+                        )
+                      ]
+                    }
+                    handleUpdateRoulette(newRoulette)
                   }}
                 deleteHandler={() => {
-                  setRoulette({...roulette, candidates: roulette.candidates.filter((_, index) => index !== i)}) }
-                }
+                  const newRoulette = { ...roulette, candidates: roulette.candidates.filter((_, index) => index !== i) }
+                  handleUpdateRoulette(newRoulette)
+                }}
                 hideHandler={() => {
                   const hideTarget = roulette.candidates[i];
                   const newRoulette = {
@@ -184,7 +200,7 @@ export const RouletteContainer = (props: Props) => {
                       )
                     ]
                   };
-                  setRoulette(newRoulette)
+                  handleUpdateRoulette(newRoulette)
                 }}
                 showHandler={() => {
                   const showTarget = roulette.candidates[i];
@@ -199,7 +215,7 @@ export const RouletteContainer = (props: Props) => {
                       )
                     ]
                   }
-                  setRoulette(newRoulette);
+                  handleUpdateRoulette(newRoulette);
                 }}
               />
             );
