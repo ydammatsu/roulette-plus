@@ -1,8 +1,8 @@
 import { createClient } from 'urql';
 
 export const GqlClient = createClient({
-  url: 'https://rzrlls6gu5c4pkq3vxsks2oxe4.appsync-api.ap-northeast-1.amazonaws.com/graphql',
-  fetchOptions: { headers: { 'x-api-key': 'da2-jf7b7ffhybbrjg5voegj6fsy4q' },
+  url: process.env.NEXT_PUBLIC_GRAPHQL_END_POINT || '',
+  fetchOptions: { headers: { 'x-api-key': process.env.NEXT_PUBLIC_GRAPHQL_API_KEY || '' },
   },
 });
 
