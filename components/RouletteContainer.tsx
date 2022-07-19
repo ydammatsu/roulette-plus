@@ -95,7 +95,8 @@ export const RouletteContainer = (props: Props) => {
   const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName);
   const [updateRouletteResult, updateRoulette] = useMutation(UpdateRouletteMutation);
   const handleUpdateRoulette = (roulette: Roulette) => {
-    setRoulette(roulette)
+    // なぜかupdateRouletteをすると再度queryが叩かれてしまう
+    // setRoulette(roulette)
     updateRoulette({ updateRouletteinput: {
         ...roulette,
         candidates: roulette.candidates.map((candidate) => { return JSON.stringify(candidate) })

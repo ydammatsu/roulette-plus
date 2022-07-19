@@ -20,7 +20,7 @@ export const useRoulette = (name: string) => {
         const id = rouleteData.id
         const name = rouleteData.name
         const candidates = rouleteData.candidates.map((value: string) => {return JSON.parse(value)})
-  
+        
         setRoulette({ id, name, candidates })
       }
     }
