@@ -5,7 +5,8 @@ import { useGetAllRoulettes } from "hooks/useGetAllRoulettes";
 import styled from "styled-components";
 import { useWaitRender } from "hooks/useWaitRender";
 import { useMutation } from "urql";
-import { CreateRouletteMutation } from "lib/gql";
+import { CreateRouletteMutation, DeleteRouletteMutation } from "lib/gql";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -32,6 +33,7 @@ const Roulettes: FC = () => {
   const { roulettes, setRoulettes, fetching, error } = useGetAllRoulettes()
   const [newRouletteName, setNewRouletteName] = useState("")
   const [createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
+  const [deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
 
   const handleSubmit = (): void => {
     createRoulette({
@@ -57,6 +59,7 @@ const Roulettes: FC = () => {
               <Link href={`/${value.name}`}>
                 <a>{value.name}</a>
               </Link>
+              <DeleteIcon onClick={() => {deleteRoulette({deleteRouletteInput: {id: value.id, name: value.name}})}}/>
             </LinkWrapper>
         )
       }

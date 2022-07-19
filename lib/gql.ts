@@ -53,3 +53,12 @@ export const UpdateRouletteMutation = `
     }  
   }
 `
+
+export const DeleteRouletteMutation = `
+  mutation ($deleteRouletteInput: DeleteRouletteInput!) {
+    deleteRoulette(input: $deleteRouletteInput) {
+      id
+      name
+    }  
+  }
+`
