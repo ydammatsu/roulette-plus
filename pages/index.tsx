@@ -31,6 +31,11 @@ const LinkWrapper = styled.div`
 const FormWrapper = styled.div`
   margin: 10px;
 `
+const ImportButton = styled("p")`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const Roulettes: FC = () => {
   const { roulettes, fetching, error } = useGetAllRoulettes()
@@ -83,7 +88,7 @@ const Roulettes: FC = () => {
               </Link>
               <DeleteIcon
                 onClick={() => { handleDelete(roulette) }}
-                style={{marginLeft: "10px",verticalAlign: "text-bottom"}}
+                style={{marginLeft: "7px",verticalAlign: "text-bottom"}}
               />
             </LinkWrapper>
         )
@@ -93,14 +98,15 @@ const Roulettes: FC = () => {
         <button onClick={handleSubmit}>add</button>
       </FormWrapper>
 
-      <p onClick={() => setModalOpen(true)}>インポート<FileUploadIcon style={{verticalAlign: "text-bottom"}}/></p>
+      <ImportButton onClick={() => setModalOpen(true)}>
+        インポート <FileUploadIcon style={{verticalAlign: "text-bottom"}}/>
+      </ImportButton>
+
       <ImportModal
         open={modalOpen}
         handleClose={() => {setModalOpen(false)}}
         handleImport={handleImport}
-      >
-        <p>モーダルです</p>
-      </ImportModal>
+      />
     </>
   )
 }

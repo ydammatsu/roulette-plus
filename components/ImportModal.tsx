@@ -26,6 +26,12 @@ const Backdrop = styled("div")`
   background-color: rgba(0, 0, 0, 0.7);
 `;
 
+const SubmitButton = styled("button")`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const style = {
   width: '800px',
   height: '400px',
@@ -37,54 +43,74 @@ const style = {
   backgroundColor: 'white'
 };
 
-export const ImportModal = (props: {
-  open: boolean;
-  handleClose: () => void;
-  handleImport: (name: string, candidates: string[]) => void;
-  children: ReactElement;
-}) => {
+const ModalTitle = () => {
+  return <h2>インポート</h2>
+}
+
+const ModalDescription = () => {
+  return(
+    <p style={{color: 'grey'}}>
+      1. <a style={{color: 'blue'}} href="https://kob3l.csb.app/" target='_blank' rel="noopener noreferrer">https://kob3l.csb.app/</a> を開いてください<br/>
+      2. 開発者ツール ＞ Console より<span style={{color: 'green'}}> localStorage.AppState </span>を実行して結果をコピーしてください<br/>
+      3. データ欄にコピペし、ルーレット名を入力後、インポートボタンを押してください<br/>
+    </p>
+  )
+}
+
+const ImportForm = (props: { handleImport: (name: string, candidates: string[]) => void }) => {
   const [name, setName] = useState('')
   const [candidatesString, setCandidatesString] = useState('')
 
   return (
-    <div>
-      <StyledModal
-        aria-labelledby="unstyled-modal-title"
-        aria-describedby="unstyled-modal-description"
-        open={props.open}
-        onClose={props.handleClose}
-        BackdropComponent={Backdrop}
+    <div style={{textAlign: 'center'}}>
+      <label style={{width: 100}}>ルーレット名</label>
+      <div style={{margin: "10px 0"}}>
+        <input
+          value={name}
+          onChange={(e) => {setName(e.currentTarget.value)}}
+        />
+      </div>
+
+      <label style={{width: 100}}>データ</label>
+      <div>
+        <input
+          style={{margin: "10px 0"}}
+          value={candidatesString}
+          onChange={(e) => {setCandidatesString(e.currentTarget.value.trim().replace(/^'|'$/g, ''))}}
+        />
+      </div>
+
+      <SubmitButton
+        onClick={() => {
+          const candidates = JSON.parse(candidatesString).candidates.map((candidate: string) => {return JSON.stringify(candidate)})
+          props.handleImport(name, candidates)
+        }}
       >
-        <Box sx={style}>
-          <h2 id="unstyled-modal-title">インポート</h2>
-          <p style={{color: 'grey'}}>
-            1. <a style={{color: 'blue'}} href="https://kob3l.csb.app/" target='_blank' rel="noopener noreferrer">https://kob3l.csb.app/</a> を開いてください<br/>
-            2. 開発者ツール ＞ Console より<span style={{color: 'green'}}> localStorage.AppState </span>を実行して結果をコピーしてください<br/>
-            3. データ欄にコピペし、ルーレット名を入力後、インポートボタンを押してください<br/>
-          </p>
-          <div style={{textAlign: 'center'}}>
-            <label style={{width: 100}}>ルーレット名</label>
-            <div style={{margin: "10px 0"}}>
-              <input value={name} onChange={(e) => {setName(e.currentTarget.value)}}/>
-            </div>
-            <label style={{width: 100}}>データ</label>
-            <div style={{margin: "10px 0"}}>
-            <input
-              value={candidatesString}
-              onChange={(e) => {setCandidatesString(e.currentTarget.value.trim().replace(/^'|'$/g, ''))}}
-            />
-            </div>
-            <button
-              onClick={() => {
-                const candidates = JSON.parse(candidatesString).candidates.map((candidate: string) => {return JSON.stringify(candidate)})
-                props.handleImport(name, candidates)
-              }}
-            >
-              インポート
-            </button>
-          </div>
-        </Box>
-      </StyledModal>
+        インポート
+      </SubmitButton>
     </div>
+  )
+}
+
+export const ImportModal = (props: {
+  open: boolean;
+  handleClose: () => void;
+  handleImport: (name: string, candidates: string[]) => void;
+}) => {
+
+  return (
+    <StyledModal
+      aria-labelledby="unstyled-modal-title"
+      aria-describedby="unstyled-modal-description"
+      open={props.open}
+      onClose={props.handleClose}
+      BackdropComponent={Backdrop}
+    >
+      <Box sx={style}>
+        <ModalTitle />
+        <ModalDescription />
+        <ImportForm handleImport={props.handleImport} />
+      </Box>
+    </StyledModal>
   );
 }
