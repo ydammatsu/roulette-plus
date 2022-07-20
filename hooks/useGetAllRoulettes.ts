@@ -13,7 +13,7 @@ export const useGetAllRoulettes = (pause: boolean) => {
 
   useEffect(() => {
     if (data?.listRoulettes?.items) {
-      setRoulettes(data.listRoulettes.items)
+      setRoulettes(data.listRoulettes.items.sort((a: Roulette, b: Roulette) => { return a.createdAt < b.createdAt ? -1 : 1 }))
     }
   }, [data])
 
