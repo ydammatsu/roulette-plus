@@ -100,8 +100,18 @@ const Roulettes: FC = () => {
       }
 
       <FormWrapper>
-        <input placeholder="New Roulette" value={newRouletteName} onChange={(e) => setNewRouletteName(e.currentTarget.value)} />
-        <button onClick={handleSubmit}>add</button>
+        <input
+          placeholder="New Roulette"
+          value={newRouletteName}
+          onChange={(e) => setNewRouletteName(e.currentTarget.value)}
+          onKeyDown={(e) => {
+            switch (e.key) {
+              case "Enter": {
+                handleSubmit()
+              }
+            }
+          }}
+        />
       </FormWrapper>
 
       <ImportButton onClick={() => setModalOpen(true)}>
