@@ -54,30 +54,34 @@ const Roulettes: FC = () => {
   const handleSubmit = (): void => {
     setPouseQuery(true)
     const id = ulid();
+    const createdAt = Date.now();
     createRoulette({
       createRouletteInput: {
         id: id,
+        createdAt: createdAt,
         name: newRouletteName,
         description: "",
         candidates: []
       }
     })
-    setRoulettes([...roulettes, { id: id, name: newRouletteName, description: '', candidates: [] }])
+    setRoulettes([...roulettes, { id: id, createdAt: createdAt, name: newRouletteName, description: '', candidates: [] }])
     setNewRouletteName("")
   }
 
   const handleImport = (name: string, candidates: string[]): void => {
     setPouseQuery(true)
     const id = ulid();
+    const createdAt = Date.now();
     createRoulette({
       createRouletteInput: {
         id: id,
+        createdAt: createdAt,
         name: name,
         description: "",
         candidates: candidates
       }
     })
-    setRoulettes([...roulettes, { id: id, name: name, description: '', candidates: [] }])
+    setRoulettes([...roulettes, { id: id, createdAt: createdAt, name: name, description: '', candidates: [] }])
     setModalOpen(false)
   }
 
@@ -85,7 +89,7 @@ const Roulettes: FC = () => {
     setPouseQuery(true)
     const id = roulette.id;
     if (confirm('Really?')) {
-      deleteRoulette({ deleteRouletteInput: { id: roulette.id } })
+      deleteRoulette({ deleteRouletteInput: { id: roulette.id, createdAt: roulette.createdAt } })
       setRoulettes(roulettes.filter((roulette) => roulette.id !== id))
     }
   }

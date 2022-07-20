@@ -6,6 +6,7 @@ export type Candidate = {
 
 export type Roulette = {
   id: string;
+  createdAt: number;
   name: string;
   description?: string
   candidates: Candidate[];
