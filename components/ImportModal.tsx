@@ -34,7 +34,7 @@ const SubmitButton = styled("button")`
 
 const style = {
   width: '800px',
-  height: '400px',
+  height: '420px',
   border: "2px solid #000",
   borderRadius: 15,
   p: 2,
@@ -60,9 +60,12 @@ const ModalDescription = () => {
 const ImportForm = (props: { handleImport: (name: string, candidates: string[]) => void }) => {
   const [name, setName] = useState('')
   const [candidatesString, setCandidatesString] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   return (
     <div style={{textAlign: 'center'}}>
+      <p style={{height: 10,color: 'red'}}>{errorMessage}</p>
+
       <label style={{width: 100}}>ルーレット名</label>
       <div style={{margin: "10px 0"}}>
         <input
@@ -83,13 +86,14 @@ const ImportForm = (props: { handleImport: (name: string, candidates: string[]) 
       <SubmitButton
         onClick={() => {
           if (name.trim().length === 0 || candidatesString.trim().length === 0) {
-            alert('全て入力してください')
+            setErrorMessage('❗️全て入力してください')
           } else {
             try {
               const candidates = JSON.parse(candidatesString).candidates.map((candidate: string) => {return JSON.stringify(candidate)})
               props.handleImport(name, candidates)
+              setErrorMessage('')
             } catch (error) {
-              alert('データが不正です。')
+              setErrorMessage('❗️データが不正です。')
             }
           }
         }}
