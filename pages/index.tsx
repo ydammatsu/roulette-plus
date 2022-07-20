@@ -43,7 +43,7 @@ const ImportButton = styled("p")`
 `;
 
 const Roulettes: FC = () => {
-  const { roulettes, fetching, error, refetch } = useGetAllRoulettes()
+  const { roulettes, fetching, error } = useGetAllRoulettes()
   const [newRouletteName, setNewRouletteName] = useState("")
   const [_createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
   const [_deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
