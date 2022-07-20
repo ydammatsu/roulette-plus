@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { Roulette } from "types/Roulette";
 import { useQuery } from "urql";
 
-export const useGetAllRoulettes = () => {
+export const useGetAllRoulettes = (pause: boolean) => {
   const [roulettes, setRoulettes] = useState<Roulette[]>([]);
   const [{ data, fetching, error }, _] = useQuery({
     query: GetAllRouletteQuery,
     requestPolicy: 'cache-and-network',
+    pause: pause,
   });
 
   useEffect(() => {

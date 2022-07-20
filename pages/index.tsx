@@ -44,7 +44,8 @@ const ImportButton = styled("p")`
 `;
 
 const Roulettes: FC = () => {
-  const { roulettes, fetching, error } = useGetAllRoulettes()
+  const [pauseQuery, setPouseQuery] = useState(false)
+  const { roulettes, fetching, error } = useGetAllRoulettes(pauseQuery)
   const [newRouletteName, setNewRouletteName] = useState("")
   const [_createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
   const [_deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
