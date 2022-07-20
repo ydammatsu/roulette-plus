@@ -9,8 +9,7 @@ import { CreateRouletteMutation, DeleteRouletteMutation } from "lib/gql";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Roulette } from "types/Roulette";
-import Modal from "@mui/material/Modal";
-import ImportModal from "components/ImportModal";
+import { ImportModal } from "components/ImportModal";
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -52,6 +51,18 @@ const Roulettes: FC = () => {
     setNewRouletteName("")
   }
 
+  const handleImport = (name: string, candidates: string[]): void => {
+    createRoulette({
+      createrouletteinput: {
+        id: Math.random().toString(32).substring(2),
+        name: name,
+        description: "",
+        candidates: candidates
+      }
+    })
+    setModalOpen(false)
+  }
+
   const handleDelete = (roulette: Roulette): void => {
     if (confirm('Really?')) {
       deleteRoulette({ deleteRouletteInput: { id: roulette.id, name: roulette.name } })
@@ -83,7 +94,13 @@ const Roulettes: FC = () => {
       </FormWrapper>
 
       <p onClick={() => setModalOpen(true)}>インポート<FileUploadIcon style={{verticalAlign: "text-bottom"}}/></p>
-      <ImportModal open={modalOpen} handleClose={() => {setModalOpen(false)}}><p>モーダルです</p></ImportModal>
+      <ImportModal
+        open={modalOpen}
+        handleClose={() => {setModalOpen(false)}}
+        handleImport={handleImport}
+      >
+        <p>モーダルです</p>
+      </ImportModal>
     </>
   )
 }

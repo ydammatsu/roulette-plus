@@ -1,6 +1,6 @@
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import { styled, Box } from "@mui/system";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -37,11 +37,15 @@ const style = {
   backgroundColor: 'white'
 };
 
-export default function ModalUnstyledDemo(props: {
+export const ImportModal = (props: {
   open: boolean;
   handleClose: () => void;
+  handleImport: (name: string, candidates: string[]) => void;
   children: ReactElement;
-}) {
+}) => {
+  const [name, setName] = useState('')
+  const [candidatesString, setCandidatesString] = useState('')
+
   return (
     <div>
       <StyledModal
@@ -61,13 +65,23 @@ export default function ModalUnstyledDemo(props: {
           <div style={{textAlign: 'center'}}>
             <label style={{width: 100}}>ルーレット名</label>
             <div style={{margin: "10px 0"}}>
-              <input/>
+              <input value={name} onChange={(e) => {setName(e.currentTarget.value)}}/>
             </div>
             <label style={{width: 100}}>データ</label>
             <div style={{margin: "10px 0"}}>
-              <input/>
+            <input
+              value={candidatesString}
+              onChange={(e) => {setCandidatesString(e.currentTarget.value.trim().replace(/^'|'$/g, ''))}}
+            />
             </div>
-            <button onClick={props.handleClose}>インポート</button>
+            <button
+              onClick={() => {
+                const candidates = JSON.parse(candidatesString).candidates.map((candidate: string) => {return JSON.stringify(candidate)})
+                props.handleImport(name, candidates)
+              }}
+            >
+              インポート
+            </button>
           </div>
         </Box>
       </StyledModal>
