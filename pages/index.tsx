@@ -26,14 +26,19 @@ const LinkWrapper = styled.div`
   text-decoration: underline;
   text-decoration-color: black;
   line-height: 30px;
+  &:hover {
+    color: blue;
+  }
 `
 
 const FormWrapper = styled.div`
   margin: 10px;
 `
 const ImportButton = styled("p")`
+  margin-top: 30px;
   &:hover {
     cursor: pointer;
+    color: blue;
   }
 `;
 
@@ -88,13 +93,14 @@ const Roulettes: FC = () => {
               </Link>
               <DeleteIcon
                 onClick={() => { handleDelete(roulette) }}
-                style={{marginLeft: "7px",verticalAlign: "text-bottom"}}
+                style={{ marginLeft: "7px", verticalAlign: "text-bottom" }}
               />
             </LinkWrapper>
         )
       }
+
       <FormWrapper>
-        <input placeholder="New Roulette" value={newRouletteName} onChange={(e) => setNewRouletteName(e.currentTarget.value)}></input>
+        <input placeholder="New Roulette" value={newRouletteName} onChange={(e) => setNewRouletteName(e.currentTarget.value)} />
         <button onClick={handleSubmit}>add</button>
       </FormWrapper>
 
