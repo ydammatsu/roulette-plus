@@ -52,7 +52,6 @@ const Roulettes: FC = () => {
   const handleSubmit = (): void => {
     createRoulette({
       createrouletteinput: {
-        id: Math.random().toString(32).substring(2),
         name: newRouletteName,
         description: "",
         candidates: []
@@ -64,7 +63,6 @@ const Roulettes: FC = () => {
   const handleImport = (name: string, candidates: string[]): void => {
     createRoulette({
       createrouletteinput: {
-        id: Math.random().toString(32).substring(2),
         name: name,
         description: "",
         candidates: candidates
