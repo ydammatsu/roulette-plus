@@ -75,7 +75,7 @@ const Roulettes: FC = () => {
 
   const handleDelete = (roulette: Roulette): void => {
     if (confirm('Really?')) {
-      deleteRoulette({ deleteRouletteInput: { id: roulette.id, name: roulette.name } })
+      deleteRoulette({ deleteRouletteInput: { id: roulette.id } })
     }
   }
 
