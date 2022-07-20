@@ -59,7 +59,6 @@ const Roulettes: FC = () => {
       }
     })
     setNewRouletteName("")
-    refetch()
   }
 
   const handleImport = (name: string, candidates: string[]): void => {
@@ -72,13 +71,11 @@ const Roulettes: FC = () => {
       }
     })
     setModalOpen(false)
-    refetch()
   }
 
   const handleDelete = (roulette: Roulette): void => {
     if (confirm('Really?')) {
       deleteRoulette({ deleteRouletteInput: { id: roulette.id, name: roulette.name } })
-      refetch()
     }
   }
 

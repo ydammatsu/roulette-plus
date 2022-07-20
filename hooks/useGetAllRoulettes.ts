@@ -5,7 +5,7 @@ import { useQuery } from "urql";
 
 export const useGetAllRoulettes = () => {
   const [roulettes, setRoulettes] = useState<Roulette[]>([]);
-  const [{ data, fetching, error }, refetch] = useQuery({
+  const [{ data, fetching, error }, _] = useQuery({
     query: GetAllRouletteQuery,
     requestPolicy: 'cache-and-network',
   });
@@ -21,8 +21,7 @@ export const useGetAllRoulettes = () => {
       roulettes,
       setRoulettes,
       fetching,
-      error,
-      refetch
+      error
     }
   )
 }
