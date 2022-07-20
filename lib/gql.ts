@@ -33,7 +33,7 @@ export const GetRouletteQuery = `
 `;
 
 export const CreateRouletteMutation = `
-  mutation ($createrouletteinput: CreateRouletteInput!) {
+  mutation ($createRouletteInput: CreateRouletteInput!) {
     createRoulette(input: $createrouletteinput) {
       id
       name
@@ -44,7 +44,7 @@ export const CreateRouletteMutation = `
 `
 
 export const UpdateRouletteMutation = `
-  mutation ($updateRouletteinput: UpdateRouletteInput!) {
+  mutation ($updateRouletteInput: UpdateRouletteInput!) {
     updateRoulette(input: $updateRouletteinput) {
       id
       name

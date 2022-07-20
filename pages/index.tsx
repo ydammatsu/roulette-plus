@@ -52,7 +52,7 @@ const Roulettes: FC = () => {
 
   const handleSubmit = (): void => {
     createRoulette({
-      createrouletteinput: {
+      createRouletteInput: {
         id: ulid(),
         name: newRouletteName,
         description: "",
@@ -64,7 +64,7 @@ const Roulettes: FC = () => {
 
   const handleImport = (name: string, candidates: string[]): void => {
     createRoulette({
-      createrouletteinput: {
+      createRouletteInput: {
         id: ulid(),
         name: name,
         description: "",
