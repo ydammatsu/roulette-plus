@@ -61,7 +61,11 @@ const Roulettes: FC = () => {
                 <a>{value.name}</a>
               </Link>
               <DeleteIcon
-                onClick={() => {deleteRoulette({deleteRouletteInput: {id: value.id, name: value.name}})}}
+                onClick={() => {
+                  if (confirm('Really?')) {
+                    deleteRoulette({deleteRouletteInput: {id: value.id, name: value.name}})
+                  }
+                }}
                 style={{marginLeft: "10px",verticalAlign: "text-bottom"}}
               />
             </LinkWrapper>
