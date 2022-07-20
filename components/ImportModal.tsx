@@ -82,8 +82,16 @@ const ImportForm = (props: { handleImport: (name: string, candidates: string[]) 
 
       <SubmitButton
         onClick={() => {
-          const candidates = JSON.parse(candidatesString).candidates.map((candidate: string) => {return JSON.stringify(candidate)})
-          props.handleImport(name, candidates)
+          if (name.trim().length === 0 || candidatesString.trim().length === 0) {
+            alert('全て入力してください')
+          } else {
+            try {
+              const candidates = JSON.parse(candidatesString).candidates.map((candidate: string) => {return JSON.stringify(candidate)})
+              props.handleImport(name, candidates)
+            } catch (error) {
+              alert('データが不正です。')
+            }
+          }
         }}
       >
         インポート
