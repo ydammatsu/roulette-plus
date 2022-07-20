@@ -7,6 +7,7 @@ import { useWaitRender } from "hooks/useWaitRender";
 import { useMutation } from "urql";
 import { CreateRouletteMutation, DeleteRouletteMutation } from "lib/gql";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -59,7 +60,10 @@ const Roulettes: FC = () => {
               <Link href={`/${value.name}`}>
                 <a>{value.name}</a>
               </Link>
-              <DeleteIcon onClick={() => {deleteRoulette({deleteRouletteInput: {id: value.id, name: value.name}})}}/>
+              <DeleteIcon
+                onClick={() => {deleteRoulette({deleteRouletteInput: {id: value.id, name: value.name}})}}
+                style={{marginLeft: "10px",verticalAlign: "text-bottom"}}
+              />
             </LinkWrapper>
         )
       }
@@ -67,6 +71,8 @@ const Roulettes: FC = () => {
         <input placeholder="New Roulette" value={newRouletteName} onChange={(e) => setNewRouletteName(e.currentTarget.value)}></input>
         <button onClick={handleSubmit}>add</button>
       </FormWrapper>
+
+      <p>インポート<FileUploadIcon style={{verticalAlign: "text-bottom"}}/></p>
     </>
   )
 }
