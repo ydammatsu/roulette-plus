@@ -14,7 +14,7 @@ export const useRoulette = (name: string, pause: boolean) => {
 
   useEffect(() => {
     if (!fetching) {
-      const rouleteData = data?.listRoulettes?.slice(0, 1)
+      const rouleteData = data?.listRoulettes?.items[0]
       if (rouleteData) {
         const id = rouleteData.id
         const name = rouleteData.name
