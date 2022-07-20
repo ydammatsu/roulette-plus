@@ -45,39 +45,48 @@ const ImportButton = styled("p")`
 
 const Roulettes: FC = () => {
   const [pauseQuery, setPouseQuery] = useState(false)
-  const { roulettes, fetching, error } = useGetAllRoulettes(pauseQuery)
+  const { roulettes, setRoulettes, fetching, error } = useGetAllRoulettes(pauseQuery)
   const [newRouletteName, setNewRouletteName] = useState("")
   const [_createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
   const [_deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleSubmit = (): void => {
+    setPouseQuery(true)
+    const id = ulid();
     createRoulette({
       createRouletteInput: {
-        id: ulid(),
+        id: id,
         name: newRouletteName,
         description: "",
         candidates: []
       }
     })
+    setRoulettes([...roulettes, { id: id, name: newRouletteName, description: '', candidates: [] }])
     setNewRouletteName("")
   }
 
   const handleImport = (name: string, candidates: string[]): void => {
+    setPouseQuery(true)
+    const id = ulid();
     createRoulette({
       createRouletteInput: {
-        id: ulid(),
+        id: id,
         name: name,
         description: "",
         candidates: candidates
       }
     })
+    setRoulettes([...roulettes, { id: id, name: name, description: '', candidates: [] }])
     setModalOpen(false)
   }
 
   const handleDelete = (roulette: Roulette): void => {
+    setPouseQuery(true)
+    const id = roulette.id;
     if (confirm('Really?')) {
       deleteRoulette({ deleteRouletteInput: { id: roulette.id } })
+      setRoulettes(roulettes.filter((roulette) => roulette.id !== id))
     }
   }
 
