@@ -11,6 +11,7 @@ export const GetAllRouletteQuery = `
     listRoulettes {
       items {
         id
+        createdAt
         name
         description
         candidates
@@ -23,9 +24,10 @@ export const GetRouletteQuery = `
   query ($name: String!) {
     listRoulettes(filter: {name: {eq: $name}}) {
       items {
+        id
+        createdAt
         candidates
         description
-        id
         name
       }
     }
@@ -36,6 +38,7 @@ export const CreateRouletteMutation = `
   mutation ($createRouletteInput: CreateRouletteInput!) {
     createRoulette(input: $createRouletteInput) {
       id
+      createdAt
       name
       description
       candidates
@@ -47,6 +50,7 @@ export const UpdateRouletteMutation = `
   mutation ($updateRouletteInput: UpdateRouletteInput!) {
     updateRoulette(input: $updateRouletteInput) {
       id
+      createdAt
       name
       description
       candidates
