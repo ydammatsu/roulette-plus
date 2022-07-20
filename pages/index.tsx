@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Roulette } from "types/Roulette";
 import { ImportModal } from "components/ImportModal";
+import { ulid } from 'ulid'
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -52,6 +53,7 @@ const Roulettes: FC = () => {
   const handleSubmit = (): void => {
     createRoulette({
       createrouletteinput: {
+        id: ulid(),
         name: newRouletteName,
         description: "",
         candidates: []
@@ -63,6 +65,7 @@ const Roulettes: FC = () => {
   const handleImport = (name: string, candidates: string[]): void => {
     createRoulette({
       createrouletteinput: {
+        id: ulid(),
         name: name,
         description: "",
         candidates: candidates

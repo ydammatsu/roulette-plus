@@ -25,6 +25,7 @@
     "react-is": "^18.2.0",
     "react-spring": "^9.5.0",
     "styled-components": "^5.3.5",
+    "ulid": "^2.3.0",
     "urql": "^2.2.2"
   },
   "devDependencies": {
