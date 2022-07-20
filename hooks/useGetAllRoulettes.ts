@@ -5,23 +5,24 @@ import { useQuery } from "urql";
 
 export const useGetAllRoulettes = () => {
   const [roulettes, setRoulettes] = useState<Roulette[]>([]);
-  const [result, _] = useQuery({
+  const [{ data, fetching, error }, refetch] = useQuery({
     query: GetAllRouletteQuery,
+    requestPolicy: 'cache-and-network',
   });
-  const { data, fetching, error } = result;
 
   useEffect(() => {
-    if (!fetching) {
+    if (data?.listRoulettes?.items) {
       setRoulettes(data.listRoulettes.items)
     }
-  }, [data, fetching])
+  }, [data])
 
   return(
     {
       roulettes,
       setRoulettes,
       fetching,
-      error
+      error,
+      refetch
     }
   )
 }
