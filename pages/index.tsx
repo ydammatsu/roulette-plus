@@ -62,13 +62,13 @@ const Roulettes: FC = () => {
     <>
       {
         roulettes.map(
-          (value, index) =>
+          (roulette, index) =>
             <LinkWrapper key={index}>
-              <Link href={`/${value.name}`}>
-                <a>{value.name}</a>
+              <Link href={`/${roulette.name}`}>
+                <a>{roulette.name}</a>
               </Link>
               <DeleteIcon
-                onClick={() => { handleDelete(value) }}
+                onClick={() => { handleDelete(roulette) }}
                 style={{marginLeft: "10px",verticalAlign: "text-bottom"}}
               />
             </LinkWrapper>
