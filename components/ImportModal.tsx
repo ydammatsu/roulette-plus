@@ -54,8 +54,8 @@ export default function ModalUnstyledDemo(props: {
         <Box sx={style}>
           <h2 id="unstyled-modal-title">インポート</h2>
           <p style={{color: 'grey'}}>
-            1. <a style={{color: 'blue'}} href="https://kob3l.csb.app/" rel="noopener noreferrer">https://kob3l.csb.app/</a> を開いてください<br/>
-            2. 開発者ツール ＞ Console より<span style={{color: 'green'}}>CopyToClipBoard(localStorage.AppSate)</span>を実行してください<br/>
+            1. <a style={{color: 'blue'}} href="https://kob3l.csb.app/" target='_blank' rel="noopener noreferrer">https://kob3l.csb.app/</a> を開いてください<br/>
+            2. 開発者ツール ＞ Console より<span style={{color: 'green'}}> localStorage.AppState </span>を実行して結果をコピーしてください<br/>
             3. データ欄にコピペし、ルーレット名を入力後、インポートボタンを押してください<br/>
           </p>
           <div style={{textAlign: 'center'}}>
