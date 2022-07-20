@@ -9,6 +9,8 @@ import { CreateRouletteMutation, DeleteRouletteMutation } from "lib/gql";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Roulette } from "types/Roulette";
+import Modal from "@mui/material/Modal";
+import ImportModal from "components/ImportModal";
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -36,6 +38,7 @@ const Roulettes: FC = () => {
   const [newRouletteName, setNewRouletteName] = useState("")
   const [_createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
   const [_deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleSubmit = (): void => {
     createRoulette({
@@ -79,7 +82,8 @@ const Roulettes: FC = () => {
         <button onClick={handleSubmit}>add</button>
       </FormWrapper>
 
-      <p>インポート<FileUploadIcon style={{verticalAlign: "text-bottom"}}/></p>
+      <p onClick={() => setModalOpen(true)}>インポート<FileUploadIcon style={{verticalAlign: "text-bottom"}}/></p>
+      <ImportModal open={modalOpen} handleClose={() => {setModalOpen(false)}}><p>モーダルです</p></ImportModal>
     </>
   )
 }
