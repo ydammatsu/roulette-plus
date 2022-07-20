@@ -17,7 +17,6 @@ import { useRoulette } from "hooks/useRoulette";
 import { Candidate, Roulette } from "types/Roulette";
 import { useMutation } from "urql";
 import { UpdateRouletteMutation } from "lib/gql";
-import { json } from "stream/consumers";
 
 const AppWrapper = styled.div`
   font-family: sans-serif;
@@ -51,6 +50,7 @@ const Wrapper: FC<{ initial: boolean, children: ReactNode }> = ({ initial, child
 };
 
 const H1Wrapper = styled.h1`
+  width: 200px;
   font-size: 30px;
   z-index: 100;
   padding: 3px;
@@ -94,6 +94,7 @@ type Props = {
 export const RouletteContainer = (props: Props) => {
   const [pauseQuery, setPouseQuery] = useState(false)
   const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName, pauseQuery);
+  const [newRouletteName, setNewRouletteName] = useState(props.rouletteName)
   const [updateRouletteResult, updateRoulette] = useMutation(UpdateRouletteMutation);
   const handleUpdateRoulette = (roulette: Roulette) => {
     // 再度 query が叩かれるのを防ぐため mutation を叩く前に pause を true にしておく
@@ -119,7 +120,21 @@ export const RouletteContainer = (props: Props) => {
         handleClose={() => setModalOpen(false)}
       />
       <H1Wrapper><Link href={"/"}><a>Roulette</a></Link></H1Wrapper>
-      <H2Wrapper>{props.rouletteName}</H2Wrapper>
+      <H2Wrapper>
+        <input
+          style={{border: 'none', outline: 'none', fontSize: 30, textAlign: 'center'}}
+          value={newRouletteName}
+          onChange={(e) => {setNewRouletteName(e.currentTarget.value)}}
+          onBlur={() => handleUpdateRoulette({...roulette, name: newRouletteName })}
+          onKeyDown={(e) => {
+            switch (e.key) {
+              case "Enter": {
+                handleUpdateRoulette({...roulette, name: newRouletteName })
+              }
+            }
+          }}
+      />
+      </H2Wrapper>
       <RouletteWrapper>
         {initial ? (
           <FM />
