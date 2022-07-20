@@ -8,6 +8,7 @@ import { useMutation } from "urql";
 import { CreateRouletteMutation, DeleteRouletteMutation } from "lib/gql";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import { Roulette } from "types/Roulette";
 
 const HeaderWrapper = styled.div`
   grid-area: header;
@@ -31,10 +32,10 @@ const FormWrapper = styled.div`
 `
 
 const Roulettes: FC = () => {
-  const { roulettes, setRoulettes, fetching, error } = useGetAllRoulettes()
+  const { roulettes, fetching, error } = useGetAllRoulettes()
   const [newRouletteName, setNewRouletteName] = useState("")
-  const [createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
-  const [deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
+  const [_createRouletteResult, createRoulette] = useMutation(CreateRouletteMutation);
+  const [_deleteRouletteResult, deleteRoulette] = useMutation(DeleteRouletteMutation);
 
   const handleSubmit = (): void => {
     createRoulette({
@@ -46,6 +47,12 @@ const Roulettes: FC = () => {
       }
     })
     setNewRouletteName("")
+  }
+
+  const handleDelete = (roulette: Roulette): void => {
+    if (confirm('Really?')) {
+      deleteRoulette({ deleteRouletteInput: { id: roulette.id, name: roulette.name } })
+    }
   }
 
   if (fetching) { return <p>loading...</p> }
@@ -61,11 +68,7 @@ const Roulettes: FC = () => {
                 <a>{value.name}</a>
               </Link>
               <DeleteIcon
-                onClick={() => {
-                  if (confirm('Really?')) {
-                    deleteRoulette({deleteRouletteInput: {id: value.id, name: value.name}})
-                  }
-                }}
+                onClick={() => { handleDelete(value) }}
                 style={{marginLeft: "10px",verticalAlign: "text-bottom"}}
               />
             </LinkWrapper>
