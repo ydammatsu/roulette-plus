@@ -13,6 +13,7 @@ import { ImportModal } from "components/ImportModal";
 import { ulid } from 'ulid'
 
 const HeaderWrapper = styled.div`
+  font-style: italic;
   grid-area: header;
   text-align: center;
 `;
@@ -148,7 +149,7 @@ const Home: NextPage = () => {
 
   return isRendered ? (
     <>
-      <HeaderWrapper><h1>Roulette</h1></HeaderWrapper>
+      <HeaderWrapper><h1>RoulettePlus</h1></HeaderWrapper>
       <BodyWrapper><Roulettes/></BodyWrapper>
     </>
   ): <></>

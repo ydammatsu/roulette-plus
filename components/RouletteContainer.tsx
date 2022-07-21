@@ -52,6 +52,7 @@ const Wrapper: FC<{ initial: boolean, children: ReactNode }> = ({ initial, child
 const H1Wrapper = styled.h1`
   width: 200px;
   font-size: 30px;
+  font-style: italic;
   z-index: 100;
   padding: 3px;
   margin: 3px;
@@ -119,7 +120,7 @@ export const RouletteContainer = (props: Props) => {
         open={modalOpen}
         handleClose={() => setModalOpen(false)}
       />
-      <H1Wrapper><Link href={"/"}><a>Roulette</a></Link></H1Wrapper>
+      <H1Wrapper><Link href={"/"}><a>RoulettePlus</a></Link></H1Wrapper>
       <H2Wrapper>
         <input
           style={{border: 'none', outline: 'none', fontSize: 30, textAlign: 'center'}}
