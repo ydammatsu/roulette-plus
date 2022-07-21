@@ -156,7 +156,7 @@ const Home: NextPage = () => {
       <HeaderWrapper><h1>RoulettePlus</h1></HeaderWrapper>
       <BodyWrapper><Roulettes/></BodyWrapper>
     </>
-  ): <></>
+  ): (<Head><title>RoulettePlus</title></Head>)
 }
 
 export default Home

@@ -22,7 +22,9 @@ const RoulettePage: NextPage = () => {
       </Head>
       <RouletteContainer rouletteName={rouletteName}/>
     </>
-  ): (<></>);
+  ): (<Head>
+    <title>{rouletteName}</title>
+  </Head>);
 }
 
 export default RoulettePage
