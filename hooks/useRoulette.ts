@@ -52,9 +52,9 @@ export const useRoulette = (name: string, pause: boolean) => {
 
   useEffect(() => {
     if (!fetching) {
-      const roulete = convertDataToRoulette(data);
-      if (roulete) {
-        setRoulette(roulete);
+      const newRoulette = convertDataToRoulette(data);
+      if (newRoulette) {
+        setRoulette(newRoulette);
       }
     }
   }, [data, fetching]);
