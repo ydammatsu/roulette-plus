@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useWaitRender } from "hooks/useWaitRender";
 import { RouletteContainer } from "components/RouletteContainer";
+import Head from "next/head";
 
 const RoulettePage: NextPage = () => {
   const router = useRouter()
@@ -15,7 +16,12 @@ const RoulettePage: NextPage = () => {
   const isRendered = useWaitRender()
 
   return isRendered && rouletteName !== '' ? (
-    <RouletteContainer rouletteName={rouletteName}/>
+    <>
+      <Head>
+        <title>{rouletteName}</title>
+      </Head>
+      <RouletteContainer rouletteName={rouletteName}/>
+    </>
   ): (<></>);
 }
 

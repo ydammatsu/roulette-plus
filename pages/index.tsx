@@ -11,6 +11,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Roulette } from "types/Roulette";
 import { ImportModal } from "components/ImportModal";
 import { ulid } from 'ulid'
+import Head from "next/head";
 
 const HeaderWrapper = styled.div`
   font-style: italic;
@@ -100,6 +101,9 @@ const Roulettes: FC = () => {
 
   return (
     <>
+      <Head>
+        <title>RoulettePlus</title>
+      </Head>
       {
         roulettes.map(
           (roulette, index) =>
