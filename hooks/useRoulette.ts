@@ -26,7 +26,10 @@ const convertDataToRoulette = (responseData: any): undefined | Roulette => {
 
   if (rouletteData) {
     const roulette: Roulette = {
-      ...rouletteData,
+      id: rouletteData.id,
+      name: rouletteData.name,
+      createdAt: rouletteData.createdAt,
+      description: rouletteData.description,
       candidates: rouletteData.candidates.map(
         // NOTE: DynamoDB の仕様上ネストした値を持てなかったので candidates には JSON のリストを入れている
         (value: string) => {
