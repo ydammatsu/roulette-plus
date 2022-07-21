@@ -35,11 +35,11 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo(props: {
+export const WinModal = (props: {
   winner: Candidate;
   open: boolean;
   handleClose: () => void;
-}) {
+}) => {
   return (
     <div>
       <StyledModal
@@ -56,4 +56,4 @@ export default function ModalUnstyledDemo(props: {
       </StyledModal>
     </div>
   );
-}
+};

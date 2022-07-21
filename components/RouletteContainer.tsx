@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import { MemoRoulette } from 'components/Roulette';
 import { JPInput } from 'components/JPInput';
 import { CandidateHeader, CandidateRow } from 'components/Candidate';
-import MyModal from 'components/MyModal';
+import { WinModal } from 'components/WinModal';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRoulette } from 'hooks/useRoulette';
@@ -117,7 +117,7 @@ export const RouletteContainer = (props: Props) => {
 
   return (
     <Wrapper initial={initial}>
-      <MyModal
+      <WinModal
         winner={currentWinner}
         open={modalOpen}
         handleClose={() => setModalOpen(false)}
