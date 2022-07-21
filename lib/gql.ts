@@ -2,7 +2,8 @@ import { createClient } from 'urql';
 
 export const GqlClient = createClient({
   url: process.env.NEXT_PUBLIC_GRAPHQL_END_POINT || '',
-  fetchOptions: { headers: { 'x-api-key': process.env.NEXT_PUBLIC_GRAPHQL_API_KEY || '' },
+  fetchOptions: {
+    headers: { 'x-api-key': process.env.NEXT_PUBLIC_GRAPHQL_API_KEY || '' },
   },
 });
 
@@ -18,7 +19,7 @@ export const GetAllRouletteQuery = `
       }
     }
   }
-`
+`;
 
 export const GetRouletteQuery = `
   query ($name: String!) {
@@ -44,7 +45,7 @@ export const CreateRouletteMutation = `
       candidates
     }
   }
-`
+`;
 
 export const UpdateRouletteMutation = `
   mutation ($updateRouletteInput: UpdateRouletteInput!) {
@@ -56,7 +57,7 @@ export const UpdateRouletteMutation = `
       candidates
     }  
   }
-`
+`;
 
 export const DeleteRouletteMutation = `
   mutation ($deleteRouletteInput: DeleteRouletteInput!) {
@@ -65,4 +66,4 @@ export const DeleteRouletteMutation = `
       name
     }  
   }
-`
+`;

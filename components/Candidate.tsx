@@ -1,7 +1,7 @@
-import { FC, FormEvent } from "react";
-import styled from "styled-components";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { FC, FormEvent } from 'react';
+import styled from 'styled-components';
+import Switch from '@mui/material/Switch';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 type RowWrapperProps = {
   highlight?: boolean;
@@ -12,15 +12,15 @@ const Wrapper = styled.div<RowWrapperProps>`
   display: grid;
   grid-template-columns: 20px 2fr 60px 60px;
   align-items: center;
-  color: ${(props) => (props.hide ? "#ababab" : "none")};
+  color: ${(props) => (props.hide ? '#ababab' : 'none')};
   border-bottom: solid white 5px;
   input {
-    color: ${(props) => (props.hide ? "#ababab" : "none")};
+    color: ${(props) => (props.hide ? '#ababab' : 'none')};
   }
 `;
 
 const Index = styled.div<{ highlight: boolean }>`
-  color: ${(props) => (props.highlight ? "red" : "none")};
+  color: ${(props) => (props.highlight ? 'red' : 'none')};
 `;
 
 const Input = styled.input`
@@ -38,7 +38,6 @@ type Props = {
   deleteHandler: () => void;
   highlight?: boolean;
 };
-
 
 export const CandidateHeader: FC = () => {
   return (
@@ -59,7 +58,7 @@ export const CandidateRow: FC<Props> = ({
   hideHandler,
   showHandler,
   deleteHandler,
-  highlight
+  highlight,
 }) => {
   return (
     <Wrapper highlight={highlight ?? false} hide={hide}>

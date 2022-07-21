@@ -1,7 +1,7 @@
-import { GetAllRouletteQuery } from "lib/gql";
-import { useEffect, useState } from "react";
-import { Roulette } from "types/Roulette";
-import { useQuery } from "urql";
+import { GetAllRouletteQuery } from 'lib/gql';
+import { useEffect, useState } from 'react';
+import { Roulette } from 'types/Roulette';
+import { useQuery } from 'urql';
 
 export const useGetAllRoulettes = (pause: boolean) => {
   const [roulettes, setRoulettes] = useState<Roulette[]>([]);
@@ -13,16 +13,18 @@ export const useGetAllRoulettes = (pause: boolean) => {
 
   useEffect(() => {
     if (data?.listRoulettes?.items) {
-      setRoulettes(data.listRoulettes.items.sort((a: Roulette, b: Roulette) => { return a.createdAt < b.createdAt ? -1 : 1 }))
+      setRoulettes(
+        data.listRoulettes.items.sort((a: Roulette, b: Roulette) => {
+          return a.createdAt < b.createdAt ? -1 : 1;
+        }),
+      );
     }
-  }, [data])
+  }, [data]);
 
-  return(
-    {
-      roulettes,
-      setRoulettes,
-      fetching,
-      error
-    }
-  )
-}
+  return {
+    roulettes,
+    setRoulettes,
+    fetching,
+    error,
+  };
+};

@@ -1,28 +1,28 @@
-import { FormEvent, HTMLProps, useState, KeyboardEvent } from "react";
+import { FormEvent, HTMLProps, useState, KeyboardEvent } from 'react';
 
 export const JPInput = (props: HTMLProps<HTMLInputElement>) => {
-  const [composition, setComposition] = useState<"start" | "update" | "end">(
-    "start"
+  const [composition, setComposition] = useState<'start' | 'update' | 'end'>(
+    'start',
   );
   return (
     <input
       value={props.value}
       onCompositionStart={() => {
-        setComposition("start");
+        setComposition('start');
       }}
       onCompositionUpdate={() => {
-        setComposition("update");
+        setComposition('update');
       }}
       onCompositionEnd={() => {
-        setComposition("end");
+        setComposition('end');
       }}
       onChange={(e: FormEvent<HTMLInputElement>) => {
         props.onChange && props.onChange(e);
       }}
       onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
         switch (e.key) {
-          case "Enter": {
-            if (composition === "update") {
+          case 'Enter': {
+            if (composition === 'update') {
               return;
             }
           }

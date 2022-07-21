@@ -1,22 +1,15 @@
-import {
-  useState,
-  FormEvent,
-  KeyboardEvent,
-  FC,
-  memo,
-  ReactNode,
-} from "react";
-import { useSpring, animated } from "react-spring";
-import { MemoRoulette } from "components/Roulette";
-import { JPInput } from "components/JPInput";
-import { CandidateHeader, CandidateRow } from "components/Candidate";
-import MyModal from "components/MyModal";
-import styled from "styled-components";
-import Link from "next/link";
-import { useRoulette } from "hooks/useRoulette";
-import { Candidate, Roulette } from "types/Roulette";
-import { useMutation } from "urql";
-import { UpdateRouletteMutation } from "lib/gql";
+import { useState, FormEvent, KeyboardEvent, FC, memo, ReactNode } from 'react';
+import { useSpring, animated } from 'react-spring';
+import { MemoRoulette } from 'components/Roulette';
+import { JPInput } from 'components/JPInput';
+import { CandidateHeader, CandidateRow } from 'components/Candidate';
+import MyModal from 'components/MyModal';
+import styled from 'styled-components';
+import Link from 'next/link';
+import { useRoulette } from 'hooks/useRoulette';
+import { Candidate, Roulette } from 'types/Roulette';
+import { useMutation } from 'urql';
+import { UpdateRouletteMutation } from 'lib/gql';
 
 const AppWrapper = styled.div`
   font-family: sans-serif;
@@ -24,9 +17,9 @@ const AppWrapper = styled.div`
   grid-template-columns: 3fr 2fr;
   grid-template-rows: 1fr 8fr 1fr;
   grid-template-areas:
-    "header header"
-    "roulette controller"
-    "footer footer";
+    'header header'
+    'roulette controller'
+    'footer footer';
 `;
 const InitialAppWrapper = styled.div`
   font-family: sans-serif;
@@ -35,13 +28,16 @@ const InitialAppWrapper = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 8fr 1fr;
   grid-template-areas:
-    "header"
-    "roulette"
-    "controller"
-    "footer";
+    'header'
+    'roulette'
+    'controller'
+    'footer';
 `;
 
-const Wrapper: FC<{ initial: boolean, children: ReactNode }> = ({ initial, children }) => {
+const Wrapper: FC<{ initial: boolean; children: ReactNode }> = ({
+  initial,
+  children,
+}) => {
   return initial ? (
     <InitialAppWrapper>{children}</InitialAppWrapper>
   ) : (
@@ -81,7 +77,7 @@ function FlippingMessage() {
     reset: true,
     reverse: flip,
     delay: 200,
-    onRest: () => set(!flip)
+    onRest: () => set(!flip),
   });
   return <animated.h2 style={props}>Enter candidates</animated.h2>;
 }
@@ -93,24 +89,30 @@ type Props = {
 };
 
 export const RouletteContainer = (props: Props) => {
-  const [pauseQuery, setPouseQuery] = useState(false)
-  const {roulette, setRoulette, currentWinner, setCurrentWinner} = useRoulette(props.rouletteName, pauseQuery);
-  const [newRouletteName, setNewRouletteName] = useState(props.rouletteName)
-  const [updateRouletteResult, updateRoulette] = useMutation(UpdateRouletteMutation);
+  const [pauseQuery, setPouseQuery] = useState(false);
+  const { roulette, setRoulette, currentWinner, setCurrentWinner } =
+    useRoulette(props.rouletteName, pauseQuery);
+  const [newRouletteName, setNewRouletteName] = useState(props.rouletteName);
+  const [updateRouletteResult, updateRoulette] = useMutation(
+    UpdateRouletteMutation,
+  );
   const handleUpdateRoulette = (roulette: Roulette) => {
     // 再度 query が叩かれるのを防ぐため mutation を叩く前に pause を true にしておく
-    setPouseQuery(true)
-    setRoulette(roulette)
-    updateRoulette({ updateRouletteInput: {
+    setPouseQuery(true);
+    setRoulette(roulette);
+    updateRoulette({
+      updateRouletteInput: {
         ...roulette,
-        candidates: roulette.candidates.map((candidate) => { return JSON.stringify(candidate) })
-      }
-    })
-  }
+        candidates: roulette.candidates.map((candidate) => {
+          return JSON.stringify(candidate);
+        }),
+      },
+    });
+  };
 
   const [spinIt, setSpinIt] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [v, setV] = useState("");
+  const [v, setV] = useState('');
   const initial = roulette.candidates.length < 2;
 
   return (
@@ -120,21 +122,34 @@ export const RouletteContainer = (props: Props) => {
         open={modalOpen}
         handleClose={() => setModalOpen(false)}
       />
-      <H1Wrapper><Link href={"/"}><a>RoulettePlus</a></Link></H1Wrapper>
+      <H1Wrapper>
+        <Link href={'/'}>
+          <a>RoulettePlus</a>
+        </Link>
+      </H1Wrapper>
       <H2Wrapper>
         <input
-          style={{border: 'none', outline: 'none', fontSize: 30, textAlign: 'center'}}
+          style={{
+            border: 'none',
+            outline: 'none',
+            fontSize: 30,
+            textAlign: 'center',
+          }}
           value={newRouletteName}
-          onChange={(e) => {setNewRouletteName(e.currentTarget.value)}}
-          onBlur={() => handleUpdateRoulette({...roulette, name: newRouletteName })}
+          onChange={(e) => {
+            setNewRouletteName(e.currentTarget.value);
+          }}
+          onBlur={() =>
+            handleUpdateRoulette({ ...roulette, name: newRouletteName })
+          }
           onKeyDown={(e) => {
             switch (e.key) {
-              case "Enter": {
-                handleUpdateRoulette({...roulette, name: newRouletteName })
+              case 'Enter': {
+                handleUpdateRoulette({ ...roulette, name: newRouletteName });
               }
             }
           }}
-      />
+        />
       </H2Wrapper>
       <RouletteWrapper>
         {initial ? (
@@ -147,7 +162,7 @@ export const RouletteContainer = (props: Props) => {
                 candidates={roulette.candidates}
                 spinIt={spinIt}
                 onCurrentWinnerChange={(cw: Candidate) => {
-                  setCurrentWinner(cw)
+                  setCurrentWinner(cw);
                 }}
                 onRest={() => {
                   setModalOpen(true);
@@ -155,7 +170,7 @@ export const RouletteContainer = (props: Props) => {
               />
             </div>
             <button onClick={() => setSpinIt(!spinIt)}>
-              {spinIt ? "Reset" : "Start"}
+              {spinIt ? 'Reset' : 'Start'}
             </button>
           </>
         )}
@@ -169,10 +184,20 @@ export const RouletteContainer = (props: Props) => {
           }}
           onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
             switch (e.key) {
-              case "Enter": {
-                const newRoulette = {...roulette, candidates: [...roulette.candidates, { idx: roulette.candidates.length + 1, name: v, hide: false }]}
-                handleUpdateRoulette(newRoulette)
-                setV("");
+              case 'Enter': {
+                const newRoulette = {
+                  ...roulette,
+                  candidates: [
+                    ...roulette.candidates,
+                    {
+                      idx: roulette.candidates.length + 1,
+                      name: v,
+                      hide: false,
+                    },
+                  ],
+                };
+                handleUpdateRoulette(newRoulette);
+                setV('');
               }
             }
           }}
@@ -188,23 +213,28 @@ export const RouletteContainer = (props: Props) => {
                 key={i}
                 highlight={c.idx === currentWinner.idx}
                 changeHandler={(s: string) => {
-                    const changeTarget = roulette.candidates[i];
-                    const newRoulette = {
-                      ...roulette,
-                      candidates: [
-                        ...roulette.candidates.slice(0, i),
-                        { ...changeTarget, name: s },
-                        ...roulette.candidates.slice(
-                          i + 1,
-                          roulette.candidates.length + 1
-                        )
-                      ]
-                    }
-                    handleUpdateRoulette(newRoulette)
-                  }}
+                  const changeTarget = roulette.candidates[i];
+                  const newRoulette = {
+                    ...roulette,
+                    candidates: [
+                      ...roulette.candidates.slice(0, i),
+                      { ...changeTarget, name: s },
+                      ...roulette.candidates.slice(
+                        i + 1,
+                        roulette.candidates.length + 1,
+                      ),
+                    ],
+                  };
+                  handleUpdateRoulette(newRoulette);
+                }}
                 deleteHandler={() => {
-                  const newRoulette = { ...roulette, candidates: roulette.candidates.filter((_, index) => index !== i) }
-                  handleUpdateRoulette(newRoulette)
+                  const newRoulette = {
+                    ...roulette,
+                    candidates: roulette.candidates.filter(
+                      (_, index) => index !== i,
+                    ),
+                  };
+                  handleUpdateRoulette(newRoulette);
                 }}
                 hideHandler={() => {
                   const hideTarget = roulette.candidates[i];
@@ -215,11 +245,11 @@ export const RouletteContainer = (props: Props) => {
                       { ...hideTarget, hide: true },
                       ...roulette.candidates.slice(
                         i + 1,
-                        roulette.candidates.length + 1
-                      )
-                    ]
+                        roulette.candidates.length + 1,
+                      ),
+                    ],
                   };
-                  handleUpdateRoulette(newRoulette)
+                  handleUpdateRoulette(newRoulette);
                 }}
                 showHandler={() => {
                   const showTarget = roulette.candidates[i];
@@ -230,10 +260,10 @@ export const RouletteContainer = (props: Props) => {
                       { ...showTarget, hide: false },
                       ...roulette.candidates.slice(
                         i + 1,
-                        roulette.candidates.length + 1
-                      )
-                    ]
-                  }
+                        roulette.candidates.length + 1,
+                      ),
+                    ],
+                  };
                   handleUpdateRoulette(newRoulette);
                 }}
               />
@@ -243,4 +273,4 @@ export const RouletteContainer = (props: Props) => {
       </ControllerWrapper>
     </Wrapper>
   );
-}
+};

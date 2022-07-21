@@ -1,6 +1,6 @@
-import ModalUnstyled from "@mui/core/ModalUnstyled";
-import { styled, Box } from "@mui/system";
-import { Candidate } from "types/Roulette";
+import ModalUnstyled from '@mui/core/ModalUnstyled';
+import { styled, Box } from '@mui/system';
+import { Candidate } from 'types/Roulette';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -15,7 +15,7 @@ const StyledModal = styled(ModalUnstyled)`
   align-items: center;
   justify-content: center;
 `;
-const Backdrop = styled("div")`
+const Backdrop = styled('div')`
   z-index: -1;
   position: fixed;
   right: 0;
@@ -28,11 +28,11 @@ const Backdrop = styled("div")`
 
 const style = {
   width: 400,
-  border: "2px solid #000",
+  border: '2px solid #000',
   borderRadius: 15,
   p: 2,
   px: 4,
-  pb: 3
+  pb: 3,
 };
 
 export default function ModalUnstyledDemo(props: {
@@ -43,15 +43,15 @@ export default function ModalUnstyledDemo(props: {
   return (
     <div>
       <StyledModal
-        aria-labelledby="unstyled-modal-title"
-        aria-describedby="unstyled-modal-description"
+        aria-labelledby='unstyled-modal-title'
+        aria-describedby='unstyled-modal-description'
         open={props.open}
         onClose={props.handleClose}
         BackdropComponent={Backdrop}
       >
         <Box sx={style}>
-          <h2 id="unstyled-modal-title">The winner is</h2>
-          <h3 id="unstyled-modal-description">{props.winner.name} 🎉</h3>
+          <h2 id='unstyled-modal-title'>The winner is</h2>
+          <h3 id='unstyled-modal-description'>{props.winner.name} 🎉</h3>
         </Box>
       </StyledModal>
     </div>

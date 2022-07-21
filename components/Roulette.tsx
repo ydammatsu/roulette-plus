@@ -1,8 +1,8 @@
-import { animated, useSpring } from "react-spring";
-import { easePolyOut } from "d3-ease";
-import { useEffect, memo, useRef } from "react";
-import { calcWinner } from "lib/calc";
-import { Candidate } from "types/Roulette";
+import { animated, useSpring } from 'react-spring';
+import { easePolyOut } from 'd3-ease';
+import { useEffect, memo, useRef } from 'react';
+import { calcWinner } from 'lib/calc';
+import { Candidate } from 'types/Roulette';
 
 type Props = {
   radius: number;
@@ -25,26 +25,26 @@ const Roulette = (props: Props) => {
     from: { y: 0 },
     config: {
       easing: easePolyOut,
-      duration: 10000
-    }
+      duration: 10000,
+    },
   }));
-  let currentWinner: Candidate = { idx: -1, name: "dummy", hide: true };
+  let currentWinner: Candidate = { idx: -1, name: 'dummy', hide: true };
 
   const circleProps = {
     r: props.radius,
     cx: 0,
-    cy: 0
+    cy: 0,
   };
 
   const dashWidth = calcDashWidth(circleProps.r, numSlots);
   const svgConfig = {
     width: 400,
-    height: 400
+    height: 400,
   };
 
   const translateCood = {
     x: svgConfig.width / 2,
-    y: svgConfig.height / 2
+    y: svgConfig.height / 2,
   };
 
   const initialRotate =
@@ -70,7 +70,7 @@ const Roulette = (props: Props) => {
         },
         onRest: () => {
           props.onRest();
-        }
+        },
       });
     }
     prevSpinIt.current = props.spinIt;
@@ -94,8 +94,8 @@ const Roulette = (props: Props) => {
             r={circleProps.r}
             cx={circleProps.cx}
             cy={circleProps.cy}
-            fill="bisque"
-            stroke="tomato"
+            fill='bisque'
+            stroke='tomato'
             strokeWidth={`${circleProps.r}`}
             strokeDasharray={`${dashWidth} ${dashWidth}`}
           />
@@ -108,8 +108,8 @@ const Roulette = (props: Props) => {
               r={circleProps.r}
               cx={circleProps.cx}
               cy={circleProps.cy}
-              fill="none"
-              stroke="#47e3ff"
+              fill='none'
+              stroke='#47e3ff'
               strokeWidth={`${circleProps.r}`}
               strokeDasharray={`${dashWidth} ${dashWidth}`}
             />
@@ -124,8 +124,8 @@ const Roulette = (props: Props) => {
                 r={circleProps.r}
                 cx={circleProps.cx}
                 cy={circleProps.cy}
-                fill="none"
-                stroke="#54ff9f"
+                fill='none'
+                stroke='#54ff9f'
                 strokeWidth={`${circleProps.r}`}
                 strokeDasharray={`${dashWidth} ${dashWidth * (numSlots - 1)}`}
               />
@@ -139,7 +139,7 @@ const Roulette = (props: Props) => {
             }) translate(0, ${-props.radius * 1.5 + 25})`}
             key={i}
           >
-            <text x={0} y={0} textAnchor="middle">
+            <text x={0} y={0} textAnchor='middle'>
               {c.idx}
             </text>
           </g>
@@ -152,13 +152,13 @@ const Roulette = (props: Props) => {
         }, -10)`}
       >
         <polygon
-          points="10,0 0,20 20,20"
-          style={{ fill: "black", stroke: "purple", strokeWidth: 1 }}
+          points='10,0 0,20 20,20'
+          style={{ fill: 'black', stroke: 'purple', strokeWidth: 1 }}
         />
       </g>
     </svg>
   );
-}
+};
 
 const candidatesEqual = (ca: Candidate, cb: Candidate) => {
   return ca.name === cb.name && ca.idx === cb.idx && ca.hide === cb.hide;
@@ -171,7 +171,7 @@ const areEqual = (prevProps: Props, nextProps: Props) => {
     prevProps.candidates.length === nextProps.candidates.length &&
     prevProps.candidates
       .map((_, i) =>
-        candidatesEqual(prevProps.candidates[i], nextProps.candidates[i])
+        candidatesEqual(prevProps.candidates[i], nextProps.candidates[i]),
       )
       .reduce((x, y) => x && y);
   return res;
