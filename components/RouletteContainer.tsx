@@ -1,7 +1,7 @@
 import { useState, FormEvent, KeyboardEvent, FC, memo, ReactNode } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { MemoRoulette } from 'components/Roulette';
-import { JPInput } from 'components/JPInput';
+import { NewCandidateInput } from 'components/NewCandidateInput';
 import { CandidateHeader, CandidateRow } from 'components/Candidate';
 import { WinModal } from 'components/WinModal';
 import styled from 'styled-components';
@@ -176,7 +176,7 @@ export const RouletteContainer = (props: Props) => {
         )}
       </RouletteWrapper>
       <ControllerWrapper>
-        <JPInput
+        <NewCandidateInput
           value={v}
           onChange={(e: FormEvent<HTMLInputElement>) => {
             const value = e.currentTarget.value;

@@ -1,6 +1,6 @@
 import { FormEvent, HTMLProps, useState, KeyboardEvent } from 'react';
 
-export const JPInput = (props: HTMLProps<HTMLInputElement>) => {
+export const NewCandidateInput = (props: HTMLProps<HTMLInputElement>) => {
   const [composition, setComposition] = useState<'start' | 'update' | 'end'>(
     'start',
   );
