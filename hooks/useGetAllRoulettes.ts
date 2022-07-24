@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Roulette } from 'types/Roulette';
 import { useQuery } from 'urql';
 
-const convertDataToRoulettes = (responseData: any): Roulette[] | undefined => {
+const convertDataToRoulettes = (responseData: any) => {
   const roulettesData: Roulette[] | undefined =
     responseData?.listRoulettes?.items;
 

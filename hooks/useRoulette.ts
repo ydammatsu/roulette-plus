@@ -19,7 +19,7 @@ const dummyRoulette: Roulette = {
 };
 
 // APIのレスポンスをRouletteのデータとして変換する。
-const convertDataToRoulette = (responseData: any): undefined | Roulette => {
+const convertDataToRoulette = (responseData: any) => {
   // レスポンスには下記形式で値が入っている
   // listRoulettes: {items: [{id: "xxxx", createdAt: 123456789,…}],…}
   const rouletteData = responseData?.listRoulettes?.items[0];
