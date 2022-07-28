@@ -4,12 +4,14 @@
 
 ## 環境構築
 
-- 環境変数の設定をする。
+### 環境変数の設定をする。
 
-  - NEXT_PUBLIC_GRAPHQL_END_POINT に graphql のエンドポイント
-  - NEXT_PUBLIC_GRAPHQL_API_KEY に graphql の API キー
+下記を設定
 
-- 起動
+- NEXT_PUBLIC_GRAPHQL_END_POINT に graphql のエンドポイント
+- NEXT_PUBLIC_GRAPHQL_API_KEY に graphql の API キー
+
+### 起動
 
 ```
 yarn dev
