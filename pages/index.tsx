@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import { useGetAllRoulettes } from 'hooks/useGetAllRoulettes';
 import styled from 'styled-components';
-import { useWaitRender } from 'hooks/useWaitRender';
 import { useMutation } from 'urql';
 import { CreateRouletteMutation, DeleteRouletteMutation } from 'lib/gql';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -178,10 +177,7 @@ const Roulettes: FC = () => {
 };
 
 const Home: NextPage = () => {
-  // CSSが摘要されるのを待つ
-  const isRendered = useWaitRender();
-
-  return isRendered ? (
+  return (
     <>
       <HeaderWrapper>
         <h1>RoulettePlus</h1>
@@ -190,10 +186,6 @@ const Home: NextPage = () => {
         <Roulettes />
       </BodyWrapper>
     </>
-  ) : (
-    <Head>
-      <title>RoulettePlus</title>
-    </Head>
   );
 };
 

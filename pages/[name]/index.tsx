@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useWaitRender } from 'hooks/useWaitRender';
 import { RouletteContainer } from 'components/RouletteContainer';
 import Head from 'next/head';
 
@@ -12,10 +11,7 @@ const RoulettePage: NextPage = () => {
     rouletteName = name;
   }
 
-  // CSSが摘要されるのを待つ
-  const isRendered = useWaitRender();
-
-  return isRendered && rouletteName !== '' ? (
+  return rouletteName !== '' ? (
     <>
       <Head>
         <title>{rouletteName}</title>
