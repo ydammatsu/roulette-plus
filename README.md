@@ -2,15 +2,6 @@
 
 ルーレットアプリを複数保存&永続化できるようにしたアプリ
 
-## 環境構築
-
-### 環境変数の設定をする。
-
-下記を設定
-
-- NEXT_PUBLIC_GRAPHQL_END_POINT に graphql のエンドポイント
-- NEXT_PUBLIC_GRAPHQL_API_KEY に graphql の API キー
-
 ### 起動
 
 ```
